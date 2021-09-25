@@ -1,11 +1,5 @@
-const express = require("express");
-const app = express();
-const port = 3000;
+const app = require("./app");
+const { Server } = require("./server");
 
-app.get("/", (req, res) => {
-  res.json({ success: true });
-});
-
-app.listen(port, () => {
-  console.log(`app listening on port: ${port}`);
-});
+const server = new Server(app);
+server.listen();
