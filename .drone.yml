@@ -1,33 +1,31 @@
-# kind: pipeline
-# type: docker
-# name: default-a
-
-# steps:
-#   - name: build
-#     image: node:latest
-#     commands:
-#       - npm install
-
-#   - name: test
-#     image: node:latest
-#     commands:
-#       - npm run test
-
-#   - name: deploy
-#     image: alpine
-#     commands:
-#       - "echo deploying"
-#     when:
-#       branch: ["main"]
-#       event: [push]
-
 kind: pipeline
 type: docker
-name: default
+name: pre-deploy
+trigger:
+  branch: [main]
+  event: [pull_request]
 
 steps:
-  - name: greeting
+  - name: build
+    image: node:latest
+    commands:
+      - npm install
+
+  - name: test
+    image: node:latest
+    commands:
+      - npm run test
+
+---
+kind: pipeline
+type: docker
+name: deploy
+trigger:
+  branch: [main]
+  event: [push]
+
+steps:
+  - name: build image
     image: alpine
     commands:
-      - echo hello
-      - echo world
+      - "echo building image"
