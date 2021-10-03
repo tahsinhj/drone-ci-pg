@@ -12,3 +12,11 @@ steps:
     image: node:latest
     commands:
       - npm run test
+
+  - name: deploy
+    image: alpine
+    commands:
+      - "echo deploying"
+    when:
+      branch: ["main"]
+      event: [push]
