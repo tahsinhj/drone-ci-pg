@@ -1,7 +1,14 @@
-pipeline:
-  build:
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build
     image: node:latest
-    commands: npm install
-  test:
+    commands:
+      - npm install
+
+  - name: test
     image: node:latest
-    commands: npm run test
+    commands:
+      - npm run test

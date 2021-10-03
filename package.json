@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src",
-    "test": "node src/tests/index.test"
+    "test": "node src/tests/a.test.js && node src/tests/b.test.js && echo '✅ all test passed'"
   },
   "repository": {
     "type": "git",
